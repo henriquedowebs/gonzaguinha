@@ -26,7 +26,7 @@
                 <a href="#depoimentos">Depoimentos</a>
                 <a href="#sobre">Sobre</a>
             </nav>
-            <a href="#orcamento" class="btn-outline">Fazer Orçamento</a>
+            <a href="https://api.whatsapp.com/send?phone=5511915310573&text=Ol%C3%A1%2C%20tudo%20bem%3F%20vim%20do%20site%20e%20gostaria%20de%20faze%20um%20Or%C3%A7amento" target="_blank" class="btn-outline">Falar com Especialista</a>
         </div>
     </header>
 
@@ -35,7 +35,7 @@
         <div class="container hero-content">
             <div class="hero-text">
                 <div class="badge">🪓 Marcenaria de Móveis Planejados em São Miguel Paulista</div>
-                <h1>Móveis Planejados para<br>todos os ambientes!</h1>
+                <h1>Móveis Planejados para <br class="desktop-only">todos os ambientes!</h1>
                 <p>Móveis planejados sob medida com acabamento perfeito, alta durabilidade. Parcele em até 21x no cartão
                     de crédito e tenha móveis que cabem de verdade no seu bolso.</p>
 
@@ -58,7 +58,7 @@
                     "Oxente! Transforme sua casa sem complicação e aproveite nosso Desconto Especial para Nordestinos!"
                 </div>
 
-                <a href="#contato" class="btn-solid">Falar com Especialista</a>
+                <a href="https://api.whatsapp.com/send?phone=5511915310573&text=Ol%C3%A1%2C%20tudo%20bem%3F%20vim%20do%20site%20e%20gostaria%20de%20faze%20um%20Or%C3%A7amento" target="_blank" class="btn-solid">Falar com Especialista</a>
             </div>
 
             <div class="hero-images">
@@ -168,8 +168,12 @@
                         style="width:100%; border-radius:6px; aspect-ratio: 4/3; object-fit: cover;">
                 </div>
             </div>
+            
+            <!-- Indicadores do Carrossel (Mobile) -->
+            <div class="carousel-dots"></div>
+
             <div class="text-center">
-                <a href="#contato" class="btn-solid">Falar com Especialista</a>
+                <a href="https://api.whatsapp.com/send?phone=5511915310573&text=Ol%C3%A1%2C%20tudo%20bem%3F%20vim%20do%20site%20e%20gostaria%20de%20faze%20um%20Or%C3%A7amento" target="_blank" class="btn-solid">Falar com Especialista</a>
             </div>
         </div>
     </section>
@@ -380,7 +384,7 @@
         <div class="footer-bottom">
             <div class="container">
                 <p>© 2026 Gonzaguinha Jr. Móveis Planejados. Todos os direitos reservados. CNPJ: 00.000.000/0001-00</p>
-                <a href="#contato" class="btn-solid">Falar com Especialista</a>
+                <a href="https://api.whatsapp.com/send?phone=5511915310573&text=Ol%C3%A1%2C%20tudo%20bem%3F%20vim%20do%20site%20e%20gostaria%20de%20faze%20um%20Or%C3%A7amento" target="_blank" class="btn-solid">Falar com Especialista</a>
             </div>
         </div>
     </footer>
@@ -415,6 +419,72 @@
                 }
             }, 3000);
         }
+
+        // Portfolio Mobile Carousel
+        const portfolioGrid = document.querySelector('.portfolio-grid');
+        const dotsContainer = document.querySelector('.carousel-dots');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        let portfolioInterval;
+
+        function startPortfolioCarousel() {
+            clearInterval(portfolioInterval);
+            
+            if (window.innerWidth <= 768 && portfolioGrid) {
+                // Gerar dots
+                if (dotsContainer) {
+                    dotsContainer.innerHTML = '';
+                    portfolioItems.forEach((_, index) => {
+                        const dot = document.createElement('div');
+                        dot.classList.add('dot');
+                        if (index === 0) dot.classList.add('active');
+                        
+                        // Clique no dot
+                        dot.addEventListener('click', () => {
+                            const itemWidth = portfolioGrid.clientWidth;
+                            portfolioGrid.scrollTo({ left: itemWidth * index, behavior: 'smooth' });
+                            // Reseta intervalo ao interagir
+                            clearInterval(portfolioInterval);
+                            startAutoScroll();
+                        });
+                        
+                        dotsContainer.appendChild(dot);
+                    });
+                }
+
+                // Atualizar dot ativo ao rolar
+                portfolioGrid.addEventListener('scroll', () => {
+                    const itemWidth = portfolioGrid.clientWidth;
+                    // Prevenir divisão por zero e checar se scrollWidth é válido
+                    if (itemWidth === 0) return;
+                    const activeIndex = Math.round(portfolioGrid.scrollLeft / itemWidth);
+                    document.querySelectorAll('.carousel-dots .dot').forEach((dot, index) => {
+                        dot.classList.toggle('active', index === activeIndex);
+                    });
+                });
+
+                function startAutoScroll() {
+                    portfolioInterval = setInterval(() => {
+                        const scrollLeft = portfolioGrid.scrollLeft;
+                        const itemWidth = portfolioGrid.clientWidth;
+                        const maxScroll = portfolioGrid.scrollWidth - itemWidth;
+                        
+                        // Se chegou no fim, volta pro começo, senão vai pro próximo
+                        if (scrollLeft >= maxScroll - 10) {
+                            portfolioGrid.scrollTo({ left: 0, behavior: 'smooth' });
+                        } else {
+                            portfolioGrid.scrollBy({ left: itemWidth, behavior: 'smooth' });
+                        }
+                    }, 3000);
+                }
+                
+                startAutoScroll();
+            } else {
+                if (dotsContainer) dotsContainer.innerHTML = ''; // Remove dots no desktop
+            }
+        }
+
+        startPortfolioCarousel();
+        window.addEventListener('resize', startPortfolioCarousel);
     </script>
 </body>
 
