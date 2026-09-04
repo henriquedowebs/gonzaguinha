@@ -546,6 +546,11 @@ footer {
   margin-bottom: 60px;
 }
 
+.footer-logo {
+  max-height: 78px;
+  border-radius: 50%;
+}
+
 .footer-brand p {
   color: var(--cadet-blue);
   margin-top: 20px;
@@ -679,6 +684,30 @@ footer {
   opacity: 1;
   width: 25px;
   border-radius: 10px;
+}
+
+/* Floating WhatsApp Button */
+.floating-whatsapp {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 30px;
+  right: 30px;
+  background-color: #25D366;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.floating-whatsapp:hover {
+  background-color: #1EBE55;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* RESPONSIVIDADE */
@@ -886,5 +915,11 @@ footer {
   .about-features {
     flex-direction: column;
     gap: 20px;
+  }
+
+  .footer-logo {
+    width: 50%;
+    max-height: none;
+    height: auto;
   }
 }
