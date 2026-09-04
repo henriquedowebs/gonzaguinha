@@ -209,7 +209,7 @@ header {
 }
 
 .badge {
-  background-color: var(--anzac-10);
+  background-color: rgba(226, 182, 59, 0.05);
   border: 1px solid rgba(170, 122, 32, 0.3);
   color: var(--anzac);
   display: inline-flex;
@@ -686,6 +686,10 @@ footer {
   display: none;
 }
 
+.mobile-only-br {
+  display: none;
+}
+
 @media (max-width: 992px) {
 
   .section-tag,
@@ -764,8 +768,13 @@ footer {
 
   .hero-text .badge {
     margin-bottom: 20px;
-    background-color: rgba(198, 131, 70, 0.4);
+    background-color: rgba(198, 131, 70, 0.15);
     color: var(--white);
+    border-radius: 8px;
+  }
+
+  .mobile-only-br {
+    display: inline;
   }
 }
 
